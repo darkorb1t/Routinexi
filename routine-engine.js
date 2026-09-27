@@ -58,6 +58,101 @@ const ROUTINE_DATA = {
   ]
 };
 
+const FACULTY_DIRECTORY = {
+  HU: { name: "Faculty Member (HU)", dept: "Department of Physics", role: "Theory & Lab Instructor" },
+  RB: { name: "Faculty Member (RB)", dept: "Department of Biology", role: "Theory Instructor" },
+  MZ: { name: "Faculty Member (MZ)", dept: "Department of Chemistry", role: "Paper-1 Instructor" },
+  MF: { name: "Faculty Member (MF)", dept: "Department of Chemistry", role: "Paper-2 Instructor" },
+  TK: { name: "Faculty Member (TK)", dept: "Department of Mathematics", role: "Higher Math-1 Instructor" },
+  NZ: { name: "Faculty Member (NZ)", dept: "Department of Mathematics", role: "Higher Math-2 Instructor" },
+  AT: { name: "Faculty Member (AT)", dept: "Department of Bangla", role: "Paper-1 Instructor" },
+  JA: { name: "Faculty Member (JA)", dept: "Department of Bangla", role: "Paper-2 Instructor" },
+  MM: { name: "Faculty Member (MM)", dept: "Department of English", role: "Paper-1 Instructor" },
+  SY: { name: "Faculty Member (SY)", dept: "Department of English", role: "Paper-2 Instructor" },
+  KA: { name: "Faculty Member (KA)", dept: "Department of ICT", role: "ICT Lecturer" },
+  DH: { name: "Md. Delwar Hossain (DH)", dept: "Department of Mathematics", role: "H.M-1 Practical & Routine Committee" },
+  SK: { name: "Faculty Member (SK)", dept: "Department of Chemistry", role: "Chemistry Lab Instructor" },
+  AAli: { name: "Faculty Member (AAli)", dept: "Department of Biology", role: "Biology Lab Instructor" }
+};
+
+const RADAR_EVENTS = [
+  {
+    id: "RAD-01",
+    category: "LAB SUBMISSION",
+    subject: "Phy-1 & Che-1 Practical",
+    title: "Lab Notebook Apparatus & Observation Sign-off",
+    targetDate: "2026-10-04",
+    priority: "HIGH",
+    meta: "Bring covered practical copy during 5th-6th period lab slot"
+  },
+  {
+    id: "RAD-02",
+    category: "CLASS TEST",
+    subject: "Higher Math 1st Paper (TK)",
+    title: "Matrices & Determinants Introductory Quiz",
+    targetDate: "2026-10-07",
+    priority: "CRITICAL",
+    meta: "Duration: 25 Mins • 3rd Period (11:26 AM)"
+  },
+  {
+    id: "RAD-03",
+    category: "CLASS TEST",
+    subject: "Chemistry 1st Paper (MZ)",
+    title: "Safe Use of Laboratory & Qualitative Chemistry",
+    targetDate: "2026-10-12",
+    priority: "NORMAL",
+    meta: "1st Period (10:00 AM Sharp)"
+  },
+  {
+    id: "RAD-04",
+    category: "ACADEMIC NOTICE",
+    subject: "SGMSC Science Batch '26",
+    title: " Lab Group Division & Roll Verification",
+    targetDate: "2026-09-30",
+    priority: "HIGH",
+    meta: "Check respective notice board before Tiffin break"
+  }
+];
+
+function buildFacultyProfiles() {
+  const profiles = {};
+  Object.keys(ROUTINE_DATA).forEach(day => {
+    ROUTINE_DATA[day].forEach(slot => {
+      if (slot.type === "break" || slot.teacher === "—") return;
+      const code = slot.teacher;
+      if (!profiles[code]) {
+        const meta = FACULTY_DIRECTORY[code] || {
+          name: `Faculty (${code})`,
+          dept: "Science Division",
+          role: "Course Instructor"
+        };
+        profiles[code] = {
+          code: code,
+          name: meta.name,
+          dept: meta.dept,
+          role: meta.role,
+          modules: new Set(),
+          sessions: []
+        };
+      }
+      profiles[code].modules.add(slot.code);
+      profiles[code].sessions.push({
+        day: day,
+        period: slot.period,
+        code: slot.code,
+        time: `${slot.start} - ${slot.end}`,
+        type: slot.type
+      });
+    });
+  });
+
+  return Object.values(profiles).map(p => ({
+    ...p,
+    modules: Array.from(p.modules),
+    weeklyCount: p.sessions.length
+  })).sort((a, b) => b.weeklyCount - a.weeklyCount);
+}
+
 function toSeconds(timeStr) {
   const parts = timeStr.split(":").map(Number);
   return parts[0] * 3600 + parts[1] * 60;
@@ -79,6 +174,17 @@ function formatCountdown(totalSeconds) {
     return `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   }
   return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+}
+
+function getDaysRemaining(dateString) {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const target = new Date(dateString + "T00:00:00");
+  const diffDays = Math.round((target - today) / (1000 * 60 * 60 * 24));
+  if (diffDays < 0) return "COMPLETED";
+  if (diffDays === 0) return "TODAY";
+  if (diffDays === 1) return "TOMORROW";
+  return `IN ${diffDays} DAYS`;
 }
 
 function getLiveRoutineState(now = new Date()) {
@@ -152,5 +258,4 @@ function getLiveRoutineState(now = new Date()) {
       };
     }
   }
-     }
-      
+          }
