@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class XI (S) — 3D Live Academic Portal</title>
+  <title>SGMSC XI (Science) — Academic Command Center</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,7 @@
       font-family: 'Space Grotesk', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
+      padding-bottom: 6rem;
     }
 
     .mono { font-family: 'JetBrains Mono', monospace; }
@@ -40,6 +41,28 @@
       border: 1px solid var(--border-subtle);
     }
 
+    .floating-dock {
+      background: rgba(22, 11, 7, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(241, 228, 154, 0.28);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(241, 228, 154, 0.1);
+    }
+
+    .dock-active {
+      background-color: var(--gold);
+      color: var(--espresso);
+      font-weight: 700;
+    }
+
+    .dock-idle {
+      color: rgba(254, 244, 213, 0.7);
+    }
+    .dock-idle:hover {
+      color: var(--parchment);
+      background: rgba(254, 244, 213, 0.06);
+    }
+
     .hero-card-active {
       background: linear-gradient(145deg, rgba(254, 244, 213, 0.97) 0%, rgba(241, 228, 154, 0.92) 100%);
       color: var(--espresso);
@@ -48,9 +71,7 @@
       transform-style: preserve-3d;
     }
 
-    .perspective-stage {
-      perspective: 1200px;
-    }
+    .perspective-stage { perspective: 1200px; }
 
     .slot-card {
       transform-style: preserve-3d;
@@ -67,13 +88,8 @@
       background-color: var(--gold);
       color: var(--espresso);
     }
-
-    .tab-btn-idle {
-      color: rgba(254, 244, 213, 0.7);
-    }
-    .tab-btn-idle:hover {
-      color: var(--parchment);
-    }
+    .tab-btn-idle { color: rgba(254, 244, 213, 0.7); }
+    .tab-btn-idle:hover { color: var(--parchment); }
 
     .badge-lab {
       background: rgba(230, 209, 123, 0.2);
@@ -93,11 +109,24 @@
       color: var(--espresso);
     }
 
+    .search-input {
+      background: rgba(254, 244, 213, 0.05);
+      border: 1px solid rgba(241, 228, 154, 0.25);
+      color: var(--parchment);
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(241, 228, 154, 0.15);
+    }
+
     .period-col { color: var(--ochre); }
     .period-title, .code-title { color: var(--parchment); }
     .sub-desc { color: rgba(254, 244, 213, 0.75); }
     .divider-left { border-left: 1px solid rgba(241, 228, 154, 0.16); }
     .divider-top { border-top: 1px solid rgba(241, 228, 154, 0.12); }
+    .divider-top-always { border-top: 1px solid rgba(241, 228, 154, 0.14); }
+    .divider-row { border-bottom: 1px solid rgba(241, 228, 154, 0.08); }
     @media (min-width: 640px) {
       .divider-top { border-top: none; }
     }
@@ -132,7 +161,7 @@
     <div class="max-w-5xl mx-auto px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
       <div>
         <p class="mono text-[11px] uppercase tracking-[0.25em] text-ochre">Sylhet Govt. Model School & College</p>
-        <h1 class="text-lg font-bold tracking-tight text-parchment">CLASS XI (SCIENCE) — ARCHIVE '26</h1>
+        <h1 class="text-lg font-bold tracking-tight text-parchment">XI-SCIENCE COMMAND CENTER // '26</h1>
       </div>
       <div class="flex items-center gap-4">
         <div class="text-right">
@@ -143,64 +172,104 @@
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-5 py-10 space-y-14">
+  <main class="max-w-5xl mx-auto px-5 py-10 space-y-12">
 
-    <section class="perspective-stage">
-      <div id="live-hero-card" class="hero-card-active rounded-2xl p-6 sm:p-9">
-        <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-espresso-subtle">
-          <div class="flex items-center gap-2.5">
-            <span class="pulse-dot"></span>
-            <span id="hero-status-badge" class="mono text-xs font-bold uppercase tracking-[0.2em]">LIVE TELEMETRY</span>
-          </div>
-          <span id="hero-period-tag" class="mono text-xs font-semibold px-3 py-1 rounded-full bg-espresso text-parchment">
-            PERIOD —
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-7 items-center">
-          <div class="md:col-span-7 space-y-2">
-            <p id="hero-sub-label" class="mono text-xs uppercase tracking-[0.18em] opacity-75">CURRENT MODULE</p>
-            <h2 id="hero-subject-code" class="text-4xl sm:text-6xl font-bold tracking-tight leading-none">---</h2>
-            <p id="hero-subject-title" class="text-base sm:text-lg font-medium opacity-85">Initializing schedule engine...</p>
-          </div>
-
-          <div class="md:col-span-5 md:border-l border-espresso-subtle md:pl-6 flex flex-col justify-between space-y-3">
-            <div>
-              <p id="hero-timer-label" class="mono text-xs uppercase tracking-[0.18em] opacity-75">REMAINING IN SLOT</p>
-              <p id="hero-countdown" class="mono text-4xl sm:text-5xl font-bold tracking-tight mt-1">00:00</p>
+    <div id="view-routine" class="space-y-14">
+      <section class="perspective-stage">
+        <div id="live-hero-card" class="hero-card-active rounded-2xl p-6 sm:p-9">
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-espresso-subtle">
+            <div class="flex items-center gap-2.5">
+              <span class="pulse-dot"></span>
+              <span id="hero-status-badge" class="mono text-xs font-bold uppercase tracking-[0.2em]">LIVE TELEMETRY</span>
             </div>
-            <div class="flex items-center justify-between text-xs mono pt-2 border-t border-espresso-subtle">
-              <span id="hero-teacher">FACULTY: —</span>
-              <span id="hero-time-window">10:00 - 10:45</span>
+            <span id="hero-period-tag" class="mono text-xs font-semibold px-3 py-1 rounded-full bg-espresso text-parchment">
+              PERIOD —
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-7 items-center">
+            <div class="md:col-span-7 space-y-2">
+              <p id="hero-sub-label" class="mono text-xs uppercase tracking-[0.18em] opacity-75">CURRENT MODULE</p>
+              <h2 id="hero-subject-code" class="text-4xl sm:text-6xl font-bold tracking-tight leading-none">---</h2>
+              <p id="hero-subject-title" class="text-base sm:text-lg font-medium opacity-85">Initializing schedule engine...</p>
+            </div>
+
+            <div class="md:col-span-5 md:border-l border-espresso-subtle md:pl-6 flex flex-col justify-between space-y-3">
+              <div>
+                <p id="hero-timer-label" class="mono text-xs uppercase tracking-[0.18em] opacity-75">REMAINING IN SLOT</p>
+                <p id="hero-countdown" class="mono text-4xl sm:text-5xl font-bold tracking-tight mt-1">00:00</p>
+              </div>
+              <div class="flex items-center justify-between text-xs mono pt-2 border-t border-espresso-subtle">
+                <span id="hero-teacher">FACULTY: —</span>
+                <span id="hero-time-window">10:00 - 10:45</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="hero-progress-wrapper" class="space-y-2 pt-2">
+            <div class="w-full h-2.5 bg-espresso-track rounded-full overflow-hidden">
+              <div id="hero-progress-bar" class="h-full bg-espresso transition-all duration-700" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between mono text-[11px] font-semibold uppercase tracking-wider opacity-80">
+              <span id="hero-progress-text">0% COMPLETE</span>
+              <span id="hero-next-up">NEXT: —</span>
             </div>
           </div>
         </div>
+      </section>
 
-        <div id="hero-progress-wrapper" class="space-y-2 pt-2">
-          <div class="w-full h-2.5 bg-espresso-track rounded-full overflow-hidden">
-            <div id="hero-progress-bar" class="h-full bg-espresso transition-all duration-700" style="width: 0%"></div>
+      <section class="space-y-6 perspective-stage">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gold-subtle pb-4">
+          <div>
+            <p class="mono text-xs uppercase tracking-[0.2em] text-ochre">3D TIMELINE MATRIX</p>
+            <h3 id="schedule-heading" class="text-2xl font-bold text-parchment">Today's Academic Sequence</h3>
           </div>
-          <div class="flex justify-between mono text-[11px] font-semibold uppercase tracking-wider opacity-80">
-            <span id="hero-progress-text">0% COMPLETE</span>
-            <span id="hero-next-up">NEXT: —</span>
-          </div>
+          <div id="day-switcher" class="flex flex-wrap gap-1.5"></div>
         </div>
-      </div>
-    </section>
 
-    <section class="space-y-6 perspective-stage">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gold-subtle pb-4">
+        <div id="routine-stack" class="grid grid-cols-1 gap-4"></div>
+      </section>
+    </div>
+
+    <div id="view-faculty" class="hidden space-y-8 perspective-stage">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gold-subtle pb-5">
         <div>
-          <p class="mono text-xs uppercase tracking-[0.2em] text-ochre">3D TIMELINE MATRIX</p>
-          <h3 id="schedule-heading" class="text-2xl font-bold text-parchment">Today's Academic Sequence</h3>
+          <p class="mono text-xs uppercase tracking-[0.2em] text-ochre">INSTRUCTOR INTELLIGENCE</p>
+          <h2 class="text-3xl font-bold text-parchment mt-1">Faculty Decoder & Weekly Matrix</h2>
+          <p class="text-sm sub-desc mt-1">Search by short code (HU, MZ, RB, TK) or subject to inspect weekly lecture slots.</p>
         </div>
-        <div id="day-switcher" class="flex flex-wrap gap-1.5"></div>
+        <div class="w-full md:w-72">
+          <input id="faculty-search" type="text" placeholder="Filter code or subject (e.g. HU, Phy)..." 
+            class="search-input w-full rounded-xl px-4 py-2.5 mono text-xs">
+        </div>
       </div>
 
-      <div id="routine-stack" class="grid grid-cols-1 gap-4"></div>
-    </section>
+      <div id="faculty-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+    </div>
+
+    <div id="view-radar" class="hidden space-y-8 perspective-stage">
+      <div class="border-b border-gold-subtle pb-5">
+        <p class="mono text-xs uppercase tracking-[0.2em] text-ochre">ACADEMIC TELEMETRY</p>
+        <h2 class="text-3xl font-bold text-parchment mt-1">Live Exam & Practical Radar</h2>
+        <p class="text-sm sub-desc mt-1">Upcoming class tests, lab notebook submissions, and official notices for XI-Science.</p>
+      </div>
+
+      <div id="radar-grid" class="grid grid-cols-1 gap-4"></div>
+    </div>
 
   </main>
+
+  <nav class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 floating-dock rounded-2xl p-1.5 flex items-center gap-1.5">
+    <button id="dock-btn-routine" onclick="switchAppView('routine')" class="dock-active mono text-xs px-4 py-2.5 rounded-xl transition-all">
+      01 // ROUTINE
+    </button>
+    <button id="dock-btn-faculty" onclick="switchAppView('faculty')" class="dock-idle mono text-xs px-4 py-2.5 rounded-xl transition-all">
+      02 // FACULTY
+    </button>
+    <button id="dock-btn-radar" onclick="switchAppView('radar')" class="dock-idle mono text-xs px-4 py-2.5 rounded-xl transition-all">
+      03 // RADAR
+    </button>
+  </nav>
 
   <footer class="max-w-5xl mx-auto px-5 py-10 mt-12 border-t border-gold-subtle">
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs mono text-ochre opacity-75">
