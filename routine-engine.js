@@ -11,12 +11,12 @@ const COLLEGE_META = {
 
 const ROUTINE_DATA = {
   Sunday: [
-    { period: "1st", code: "ICT", title: "Information & Comm. Technology", teacher: "KA", start: "10:00", end: "10:45", type: "theory" },
+    { period: "1st", code: "ICT", title: "ICT", teacher: "KA", start: "10:00", end: "10:45", type: "theory" },
     { period: "2nd", code: "E-2", title: "English 2nd Paper", teacher: "SY", start: "10:46", end: "11:25", type: "theory" },
     { period: "3rd", code: "H.M-1", title: "Higher Math 1st Paper", teacher: "TK", start: "11:26", end: "12:05", type: "theory" },
     { period: "4th", code: "Bio-1", title: "Biology 1st Paper", teacher: "RB", start: "12:06", end: "12:45", type: "theory" },
-    { period: "Break", code: "TIFFIN", title: "Tiffin & Refreshment Break", teacher: "—", start: "12:46", end: "13:15", type: "break" },
-    { period: "5th & 6th", code: "Phy-1 Lab", title: "Physics 1st Paper Practical", teacher: "HU", start: "13:16", end: "14:25", type: "practical" },
+    { period: "Break", code: "TIFFIN", title: "Tiffin Break (30 Mins)", teacher: "—", start: "12:46", end: "13:15", type: "break" },
+    { period: "5th & 6th", code: "Phy-1 Practical", title: "Physics 1st Paper Lab", teacher: "HU", start: "13:16", end: "14:25", type: "practical" },
     { period: "7th", code: "B-1", title: "Bangla 1st Paper", teacher: "AT", start: "14:26", end: "15:00", type: "theory" }
   ],
   Monday: [
@@ -24,8 +24,8 @@ const ROUTINE_DATA = {
     { period: "2nd", code: "B-1", title: "Bangla 1st Paper", teacher: "AT", start: "10:46", end: "11:25", type: "theory" },
     { period: "3rd", code: "H.M-2", title: "Higher Math 2nd Paper", teacher: "NZ", start: "11:26", end: "12:05", type: "theory" },
     { period: "4th", code: "E-2", title: "English 2nd Paper", teacher: "SY", start: "12:06", end: "12:45", type: "theory" },
-    { period: "Break", code: "TIFFIN", title: "Tiffin & Refreshment Break", teacher: "—", start: "12:46", end: "13:15", type: "break" },
-    { period: "5th & 6th", code: "H.M-1 Lab", title: "Higher Math 1st Paper Practical", teacher: "DH", start: "13:16", end: "14:25", type: "practical" },
+    { period: "Break", code: "TIFFIN", title: "Tiffin Break (30 Mins)", teacher: "—", start: "12:46", end: "13:15", type: "break" },
+    { period: "5th & 6th", code: "H.M-1 Practical", title: "Higher Math 1st Paper Lab", teacher: "DH", start: "13:16", end: "14:25", type: "practical" },
     { period: "7th", code: "Phy-2", title: "Physics 2nd Paper", teacher: "HU", start: "14:26", end: "15:00", type: "theory" }
   ],
   Tuesday: [
@@ -33,7 +33,7 @@ const ROUTINE_DATA = {
     { period: "2nd", code: "Bio-1", title: "Biology 1st Paper", teacher: "RB", start: "10:46", end: "11:25", type: "theory" },
     { period: "3rd", code: "E-1", title: "English 1st Paper", teacher: "MM", start: "11:26", end: "12:05", type: "theory" },
     { period: "4th", code: "Phy-1", title: "Physics 1st Paper", teacher: "HU", start: "12:06", end: "12:45", type: "theory" },
-    { period: "Break", code: "TIFFIN", title: "Tiffin & Refreshment Break", teacher: "—", start: "12:46", end: "13:15", type: "break" },
+    { period: "Break", code: "TIFFIN", title: "Tiffin Break (30 Mins)", teacher: "—", start: "12:46", end: "13:15", type: "break" },
     { period: "5th", code: "B-1", title: "Bangla 1st Paper", teacher: "AT", start: "13:16", end: "13:50", type: "theory" },
     { period: "6th", code: "H.M-2", title: "Higher Math 2nd Paper", teacher: "NZ", start: "13:51", end: "14:25", type: "theory" },
     { period: "7th", code: "Bio-2", title: "Biology 2nd Paper", teacher: "RB", start: "14:26", end: "15:00", type: "theory" }
@@ -43,8 +43,8 @@ const ROUTINE_DATA = {
     { period: "2nd", code: "E-1", title: "English 1st Paper", teacher: "MM", start: "10:46", end: "11:25", type: "theory" },
     { period: "3rd", code: "H.M-1", title: "Higher Math 1st Paper", teacher: "TK", start: "11:26", end: "12:05", type: "theory" },
     { period: "4th", code: "Phy-1", title: "Physics 1st Paper", teacher: "HU", start: "12:06", end: "12:45", type: "theory" },
-    { period: "Break", code: "TIFFIN", title: "Tiffin & Refreshment Break", teacher: "—", start: "12:46", end: "13:15", type: "break" },
-    { period: "5th & 6th", code: "Che-1 Lab", title: "Chemistry 1st Paper Practical", teacher: "SK", start: "13:16", end: "14:25", type: "practical" },
+    { period: "Break", code: "TIFFIN", title: "Tiffin Break (30 Mins)", teacher: "—", start: "12:46", end: "13:15", type: "break" },
+    { period: "5th & 6th", code: "Che-1 Practical", title: "Chemistry 1st Paper Lab", teacher: "SK", start: "13:16", end: "14:25", type: "practical" },
     { period: "7th", code: "Che-2", title: "Chemistry 2nd Paper", teacher: "MF", start: "14:26", end: "15:00", type: "theory" }
   ],
   Thursday: [
@@ -52,65 +52,65 @@ const ROUTINE_DATA = {
     { period: "2nd", code: "Che-2", title: "Chemistry 2nd Paper", teacher: "MF", start: "10:46", end: "11:25", type: "theory" },
     { period: "3rd", code: "B-2", title: "Bangla 2nd Paper", teacher: "JA", start: "11:26", end: "12:05", type: "theory" },
     { period: "4th", code: "Bio-2", title: "Biology 2nd Paper", teacher: "RB", start: "12:06", end: "12:45", type: "theory" },
-    { period: "Break", code: "TIFFIN", title: "Tiffin & Refreshment Break", teacher: "—", start: "12:46", end: "13:15", type: "break" },
-    { period: "5th & 6th", code: "Bio-1 Lab", title: "Biology 1st Paper Practical", teacher: "AAli", start: "13:16", end: "14:25", type: "practical" },
+    { period: "Break", code: "TIFFIN", title: "Tiffin Break (30 Mins)", teacher: "—", start: "12:46", end: "13:15", type: "break" },
+    { period: "5th & 6th", code: "Bio-1 Practical", title: "Biology 1st Paper Lab", teacher: "AAli", start: "13:16", end: "14:25", type: "practical" },
     { period: "7th", code: "E-1", title: "English 1st Paper", teacher: "MM", start: "14:26", end: "15:00", type: "theory" }
   ]
 };
 
 const FACULTY_DIRECTORY = {
-  HU: { name: "Faculty Member (HU)", dept: "Department of Physics", role: "Theory & Lab Instructor" },
-  RB: { name: "Faculty Member (RB)", dept: "Department of Biology", role: "Theory Instructor" },
-  MZ: { name: "Faculty Member (MZ)", dept: "Department of Chemistry", role: "Paper-1 Instructor" },
-  MF: { name: "Faculty Member (MF)", dept: "Department of Chemistry", role: "Paper-2 Instructor" },
-  TK: { name: "Faculty Member (TK)", dept: "Department of Mathematics", role: "Higher Math-1 Instructor" },
-  NZ: { name: "Faculty Member (NZ)", dept: "Department of Mathematics", role: "Higher Math-2 Instructor" },
-  AT: { name: "Faculty Member (AT)", dept: "Department of Bangla", role: "Paper-1 Instructor" },
-  JA: { name: "Faculty Member (JA)", dept: "Department of Bangla", role: "Paper-2 Instructor" },
-  MM: { name: "Faculty Member (MM)", dept: "Department of English", role: "Paper-1 Instructor" },
-  SY: { name: "Faculty Member (SY)", dept: "Department of English", role: "Paper-2 Instructor" },
-  KA: { name: "Faculty Member (KA)", dept: "Department of ICT", role: "ICT Lecturer" },
-  DH: { name: "Md. Delwar Hossain (DH)", dept: "Department of Mathematics", role: "H.M-1 Practical & Routine Committee" },
-  SK: { name: "Faculty Member (SK)", dept: "Department of Chemistry", role: "Chemistry Lab Instructor" },
-  AAli: { name: "Faculty Member (AAli)", dept: "Department of Biology", role: "Biology Lab Instructor" }
+  HU: { name: "Physics Teacher (HU)", dept: "Physics", role: "Theory & Practical" },
+  RB: { name: "Biology Teacher (RB)", dept: "Biology", role: "Biology 1st & 2nd Paper" },
+  MZ: { name: "Chemistry Teacher (MZ)", dept: "Chemistry", role: "Chemistry 1st Paper" },
+  MF: { name: "Chemistry Teacher (MF)", dept: "Chemistry", role: "Chemistry 2nd Paper" },
+  TK: { name: "Math Teacher (TK)", dept: "Higher Math", role: "Higher Math 1st Paper" },
+  NZ: { name: "Math Teacher (NZ)", dept: "Higher Math", role: "Higher Math 2nd Paper" },
+  AT: { name: "Bangla Teacher (AT)", dept: "Bangla", role: "Bangla 1st Paper" },
+  JA: { name: "Bangla Teacher (JA)", dept: "Bangla", role: "Bangla 2nd Paper" },
+  MM: { name: "English Teacher (MM)", dept: "English", role: "English 1st Paper" },
+  SY: { name: "English Teacher (SY)", dept: "English", role: "English 2nd Paper" },
+  KA: { name: "ICT Teacher (KA)", dept: "ICT", role: "ICT Subject Teacher" },
+  DH: { name: "Md. Delwar Hossain (DH)", dept: "Higher Math", role: "Math Lab & Routine Committee" },
+  SK: { name: "Chemistry Teacher (SK)", dept: "Chemistry", role: "Chemistry Practical" },
+  AAli: { name: "Biology Teacher (AAli)", dept: "Biology", role: "Biology Practical" }
 };
 
 const RADAR_EVENTS = [
   {
     id: "RAD-01",
-    category: "LAB SUBMISSION",
-    subject: "Phy-1 & Che-1 Practical",
-    title: "Lab Notebook Apparatus & Observation Sign-off",
+    category: "LAB KHATA",
+    subject: "Physics & Chemistry Lab",
+    title: "Bring Practical Notebook for Lab Class",
     targetDate: "2026-10-04",
     priority: "HIGH",
-    meta: "Bring covered practical copy during 5th-6th period lab slot"
+    meta: "During 5th & 6th Period Lab (1:16 PM)"
   },
   {
     id: "RAD-02",
     category: "CLASS TEST",
     subject: "Higher Math 1st Paper (TK)",
-    title: "Matrices & Determinants Introductory Quiz",
+    title: "Class Test 1 — Matrices & Determinants",
     targetDate: "2026-10-07",
     priority: "CRITICAL",
-    meta: "Duration: 25 Mins • 3rd Period (11:26 AM)"
+    meta: "Time: 25 Mins • 3rd Period (11:26 AM)"
   },
   {
     id: "RAD-03",
     category: "CLASS TEST",
     subject: "Chemistry 1st Paper (MZ)",
-    title: "Safe Use of Laboratory & Qualitative Chemistry",
+    title: "Class Test 1 — Chapter 1 & 2 Basics",
     targetDate: "2026-10-12",
     priority: "NORMAL",
-    meta: "1st Period (10:00 AM Sharp)"
+    meta: "1st Period (10:00 AM)"
   },
   {
     id: "RAD-04",
-    category: "ACADEMIC NOTICE",
-    subject: "SGMSC Science Batch '26",
-    title: " Lab Group Division & Roll Verification",
+    category: "NOTICE",
+    subject: "All XI-Science Students",
+    title: "Practical Group Roll Number List",
     targetDate: "2026-09-30",
     priority: "HIGH",
-    meta: "Check respective notice board before Tiffin break"
+    meta: "Check college notice board in Tiffin Break"
   }
 ];
 
@@ -122,9 +122,9 @@ function buildFacultyProfiles() {
       const code = slot.teacher;
       if (!profiles[code]) {
         const meta = FACULTY_DIRECTORY[code] || {
-          name: `Faculty (${code})`,
-          dept: "Science Division",
-          role: "Course Instructor"
+          name: `Teacher (${code})`,
+          dept: "Science Group",
+          role: "Subject Teacher"
         };
         profiles[code] = {
           code: code,
@@ -140,7 +140,7 @@ function buildFacultyProfiles() {
         day: day,
         period: slot.period,
         code: slot.code,
-        time: `${slot.start} - ${slot.end}`,
+        time: `${formatClockTime(slot.start)} - ${formatClockTime(slot.end)}`,
         type: slot.type
       });
     });
@@ -181,10 +181,10 @@ function getDaysRemaining(dateString) {
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const target = new Date(dateString + "T00:00:00");
   const diffDays = Math.round((target - today) / (1000 * 60 * 60 * 24));
-  if (diffDays < 0) return "COMPLETED";
+  if (diffDays < 0) return "DONE";
   if (diffDays === 0) return "TODAY";
   if (diffDays === 1) return "TOMORROW";
-  return `IN ${diffDays} DAYS`;
+  return `${diffDays} DAYS LEFT`;
 }
 
 function getLiveRoutineState(now = new Date()) {
@@ -196,8 +196,8 @@ function getLiveRoutineState(now = new Date()) {
     return {
       status: "WEEKEND",
       day: currentDay,
-      headline: "WEEKEND MODE ACTIVE",
-      subtext: "Next academic session resumes Sunday at 10:00 AM",
+      headline: "COLLEGE CLOSED TODAY",
+      subtext: "Weekend Holiday! Next class on Sunday at 10:00 AM",
       schedule: ROUTINE_DATA.Sunday,
       previewDay: "Sunday"
     };
@@ -212,7 +212,7 @@ function getLiveRoutineState(now = new Date()) {
     return {
       status: "PRE_COLLEGE",
       day: currentDay,
-      headline: "FIRST LECTURE STARTS IN",
+      headline: "TODAY'S 1ST CLASS",
       countdown: formatCountdown(remaining),
       activeSlot: null,
       nextSlot: todaySchedule[0],
@@ -226,8 +226,8 @@ function getLiveRoutineState(now = new Date()) {
     return {
       status: "WRAPPED_UP",
       day: currentDay,
-      headline: "CLASSES WRAPPED UP FOR TODAY",
-      subtext: `Showing preview for ${nextAcademicDay}`,
+      headline: "TODAY'S CLASSES FINISHED",
+      subtext: `Showing routine for ${nextAcademicDay}`,
       schedule: ROUTINE_DATA[nextAcademicDay],
       previewDay: nextAcademicDay
     };
@@ -258,4 +258,4 @@ function getLiveRoutineState(now = new Date()) {
       };
     }
   }
-          }
+}
