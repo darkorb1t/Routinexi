@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XI Science Routine — SGMSC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="noise-overlay"></div>
+
+  <header class="top-nav">
+    <div class="brand-block">
+      <span class="badge-dot"></span>
+      <span class="inst-name">SGMSC // XI-SCIENCE (2026)</span>
+    </div>
+    <div class="live-clock">00:00:00 AM</div>
+  </header>
+
+  <main class="viewport-wrapper">
+    <section class="hero-stage">
+      <div class="hero-card tilt-element">
+        <div class="hero-meta">
+          <span class="status-pill">INITIALIZING ENGINE</span>
+          <span class="day-indicator">SUNDAY</span>
+        </div>
+
+        <h1 class="active-subject">Loading Session...</h1>
+        <p class="active-details">Please wait while syncing real-time clock</p>
+
+        <div class="progress-wrapper">
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill"></div>
+          </div>
+          <div class="progress-stats">
+            <span class="progress-percent">0% COMPLETE</span>
+            <span class="slot-timing">10:00 AM - 10:45 AM</span>
+          </div>
+        </div>
+
+        <div class="countdown-box">
+          <div class="countdown-label">NEXT TRANSITION IN</div>
+          <div class="countdown-timer">00:00</div>
+          <div class="next-up-text">Up Next: Syncing...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tunnel-section">
+      <div class="section-header">
+        <h2 class="tunnel-title">DAILY TIMELINE</h2>
+        <div class="day-switcher">
+          <button class="day-btn" data-day="Sunday">SUN</button>
+          <button class="day-btn" data-day="Monday">MON</button>
+          <button class="day-btn" data-day="Tuesday">TUE</button>
+          <button class="day-btn" data-day="Wednesday">WED</button>
+          <button class="day-btn" data-day="Thursday">THU</button>
+        </div>
+      </div>
+
+      <div class="cards-stack"></div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.comহ্যাঁ, একদম! এটা গিটহাবে পুশ করে রাখ, ভার্সন কন্ট্রোল একদম গোছানো থাকবে। তবে শুধু `routine-engine.js` একা তো আর ব্রাউজারে ভিউ দেখাবে না, তাই সাথে আমি তোকে **Part 2 (`index.html`)** দিয়ে দিচ্ছি। 
+
+এটাতে তোর পছন্দের **Dark Espresso** এবং **Light Parchment** কালার থিম, কাস্টম ফন্ট (*Space Grotesk* ও *JetBrains Mono*), এবং একদম পরিষ্কার স্টুডিও-গ্রেড লেআউট সেট করা আছে। কোনো সস্তা ইমোজি বা জেনেরিক ডিজাইন নেই—একদম প্রো ড্যাশবোর্ডের মতো ফিল দেবে। 
+
+আজকে যেহেতু রবিবার এবং সকাল ১০টা বাজতে মাত্র কয়েক মিনিট বাকি, তুই এখনই এই দুটো ফাইল একসাথে চালালে দেখতে পাবি **"FIRST LECTURE STARTS IN"** কাউন্টডাউন চলছে, আর ১০:০০ বাজলেই অটোমেটিক তোর ১ম পিরিয়ড (**ICT - KA**) লাইভ প্রোগ্রেস বারসহ শুরু হয়ে যাবে!
+
+### Part 2: Luxury UI & Live Dashboard (`index.html`)
+
+`routine-engine.js` ফাইলের ঠিক পাশেই (একই ফোল্ডারে) `index.html` নামে ফাইলটা তৈরি করে এই কোডটা বসিয়ে দে:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class XI (S) — Live Academic Portal</title>
+  <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap)" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: rgb(254, 244, 213);
+      --gold: rgb(241, 228, 154);
+      --ochre: rgb(230, 209, 123);
+      --espresso: rgb(44, 24, 16);
+      --espresso-deep: rgb(26, 14, 9);
+      --surface-glass: rgba(254, 244, 213, 0.04);
+      --border-subtle: rgba(241, 228, 154, 0.16);
+      --border-active: rgba(241, 228, 154, 0.65);
+    }
+
+    body {
+      background-color: var(--espresso-deep);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(230, 209, 123, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 85% 80%, rgba(44, 24, 16, 0.9) 0%, transparent 50%);
+      color: var(--parchment);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .glass-panel {
+      background: var(--surface-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hero-card-active {
+      background: linear-gradient(145deg, rgba(254, 244, 213, 0.96) 0%, rgba(241, 228, 154, 0.92) 100%);
+      color: var(--espresso);
+      border: 2px solid var(--gold);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 35px rgba(241, 228, 154, 0.18);
+    }
+
+    .slot-card {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+    }
+
+    .slot-active {
+      background: rgba(241, 228, 154, 0.12);
+      border: 1px solid var(--border-active);
+      box-shadow: 0 0 25px rgba(230, 209, 123, 0.1);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background-color: var(--espresso);
+      animation: pulse-ring 1.8s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#E6D17B] selection:text-[#2C1810]">
+
+  <header class="sticky top-0 z-40 glass-panel border-b border-[#F1E49A]/15">
+    <div class="max-w-5xl mx-auto px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <div>
+        <p class="mono text-[11px] uppercase tracking-[0.25em] text-[#E6D17B]">Sylhet Govt. Model School & College</p>
+        <h1 class="text-lg font-bold tracking-tight text-[#FEF4D5]">CLASS XI (SCIENCE) — ARCHIVE '26</h1>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="text-right">
+          <p id="live-date" class="mono text-xs text-[#E6D17B] uppercase tracking-wider">LOADING DATE</p>
+          <p id="live-clock" class="mono text-sm font-semibold text-[#FEF4D5]">00:00:00 AM</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-5 py-10 space-y-12">
+
+    <section id="hero-stage" class="perspective-container">
+      <div id="live-hero-card" class="hero-card-active rounded-2xl p-6 sm:p-9 transition-all duration-500">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-[#2C1810]/15">
+          <div class="flex items-center gap-2.5">
+            <span class="pulse-dot"></span>
+            <span id="hero-status-badge" class="mono text-xs font-bold uppercase tracking-[0.2em]">LIVE TELEMETRY</span>
+          </div>
+          <span id="hero-period-tag" class="mono text-xs font-semibold px-3 py-1 rounded-full bg-[#2C1810] text-[#FEF4D5]">
+            PERIOD —
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-7 items-center">
+          <div class="md:col-span-7 space-y-2">
+            <p id="hero-sub-label" class="mono text-xs uppercase tracking-[0.18em] opacity-75">CURRENT MODULE</p>
+            <h2 id="hero-subject-code" class="text-4xl sm:text-6xl font-bold tracking-tight leading-none">---</h2>
+            <p id="hero-subject-title" class="text-base sm:text-lg font-medium opacity-85">Initializing schedule engine...</p>
+          </div>
+
+          <div class="md:col-span-5 md:border-l border-[#2C1810]/15 md:pl-6 flex flex-col justify-between space-y-3">
+            <div>
+              <p id="hero-timer-label" class="mono text-xs uppercase tracking-[0.18em] opacity-75">REMAINING IN SLOT</p>
+              <p id="hero-countdown" class="mono text-4xl sm:text-5xl font-bold tracking-tight mt-1">00:00</p>
+            </div>
+            <div class="flex items-center justify-between text-xs mono pt-2 border-t border-[#2C1810]/10">
+              <span id="hero-teacher">FACULTY: —</span>
+              <span id="hero-time-window">10:00 - 10:45</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="hero-progress-wrapper" class="space-y-2 pt-2">
+          <div class="w-full h-2.5 bg-[#2C1810]/15 rounded-full overflow-hidden">
+            <div id="hero-progress-bar" class="h-full bg-[#2C1810] transition-all duration-700" style="width: 0%"></div>
+          </div>
+          <div class="flex justify-between mono text-[11px] font-semibold uppercase tracking-wider opacity-80">
+            <span id="hero-progress-text">0% COMPLETE</span>
+            <span id="hero-next-up">NEXT: —</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#F1E49A]/15 pb-4">
+        <div>
+          <p class="mono text-xs uppercase tracking-[0.2em] text-[#E6D17B]">TIMELINE MATRIX</p>
+          <h3 id="schedule-heading" class="text-2xl font-bold text-[#FEF4D5]">Today's Academic Sequence</h3>
+        </div>
+        <div id="day-switcher" class="flex flex-wrap gap-1.5"></div>
+      </div>
+
+      <div id="routine-stack" class="grid grid-cols-1 gap-3.5"></div>
+    </section>
+
+  </main>
+
+  <script src="routine-engine.js"></script>
+  <script>
+    const DAYS_ORDER = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+    let selectedDayOverride = null;
+
+    function renderDayTabs(activeDay) {
+      const container = document.getElementById("day-switcher");
+      container.innerHTML = DAYS_ORDER.map(day => {
+        const isSelected = (selectedDayOverride || activeDay) === day;
+        return `
+          <button onclick="selectDay('${day}')" 
+            class="mono text-xs px-3.5 py-2 rounded-lg transition-all ${
+              isSelected 
+                ? 'bg-[#F1E49A] text-[#2C1810] font-bold shadow-sm' 
+                : 'glass-panel text-[#FEF4D5]/70 hover:text-[#FEF4D5]'
+            }">
+            ${day.slice(0, 3).toUpperCase()}
+          </button>
+        `;
+      }).join("");
+    }
+
+    function selectDay(day) {
+      selectedDayOverride = day;
+      updateDashboard();
+    }
+
+    function updateDashboard() {
+      const now = new Date();
+      document.getElementById("live-date").textContent = now.toLocaleDateString("en-US", {
+        weekday: "short", month: "short", day: "numeric", year: "numeric"
+      });
+      document.getElementById("live-clock").textContent = now.toLocaleTimeString("en-US", {
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+      });
+
+      const state = getLiveRoutineState(now);
+      const displayDay = selectedDayOverride || state.previewDay || state.day;
+      renderDayTabs(displayDay);
+
+      const badge = document.getElementById("hero-status-badge");
+      const periodTag = document.getElementById("hero-period-tag");
+      const subLabel = document.getElementById("hero-sub-label");
+      const codeEl = document.getElementById("hero-subject-code");
+      const titleEl = document.getElementById("hero-subject-title");
+      const timerLabel = document.getElementById("hero-timer-label");
+      const countdownEl = document.getElementById("hero-countdown");
+      const teacherEl = document.getElementById("hero-teacher");
+      const windowEl = document.getElementById("hero-time-window");
+      const progWrap = document.getElementById("hero-progress-wrapper");
+      const progBar = document.getElementById("hero-progress-bar");
+      const progText = document.getElementById("hero-progress-text");
+      const nextUpEl = document.getElementById("hero-next-up");
+
+      if (state.status === "LIVE_SESSION") {
+        const s = state.activeSlot;
+        badge.textContent = s.type === "break" ? "REFRESHMENT WINDOW" : "SESSION IN PROGRESS";
+        periodTag.textContent = `${s.period.toUpperCase()} PERIOD`;
+        subLabel.textContent = s.type === "practical" ? "70-MINUTE PRACTICAL LAB" : "ACTIVE LECTURE";
+        codeEl.textContent = s.code;
+        titleEl.textContent = s.title;
+        timerLabel.textContent = "TIME REMAINING";
+        countdownEl.textContent = state.countdown;
+        teacherEl.textContent = `FACULTY: ${s.teacher}`;
+        windowEl.textContent = `${formatClockTime(s.start)} – ${formatClockTime(s.end)}`;
+        progWrap.style.display = "block";
+        progBar.style.width = `${state.progress}%`;
+        progText.textContent = `${state.progress}% ELAPSED`;
+        nextUpEl.textContent = state.nextSlot ? `NEXT: ${state.nextSlot.code} (${state.nextSlot.teacher})` : "FINAL PERIOD OF DAY";
+      } else if (state.status === "PRE_COLLEGE") {
+        const first = state.nextSlot;
+        badge.textContent = "STANDBY MODE";
+        periodTag.textContent = state.day.toUpperCase();
+        subLabel.textContent = state.headline;
+        codeEl.textContent = first.code;
+        titleEl.textContent = `Opening Lecture: ${first.title}`;
+        timerLabel.textContent = "DOORS OPEN IN";
+        countdownEl.textContent = state.countdown;
+        teacherEl.textContent = `FACULTY: ${first.teacher}`;
+        windowEl.textContent = `${formatClockTime(first.start)} – ${formatClockTime(first.end)}`;
+        progWrap.style.display = "none";
+      } else {
+        badge.textContent = state.status === "WEEKEND" ? "OFF-GRID / WEEKEND" : "DAY CONCLUDED";
+        periodTag.textContent = `NEXT: ${state.previewDay.toUpperCase()}`;
+        subLabel.textContent = state.headline;
+        codeEl.textContent = "10:00 AM";
+        titleEl.textContent = state.subtext;
+        timerLabel.textContent = "FIRST SLOT";
+        countdownEl.textContent = state.schedule[0].code;
+        teacherEl.textContent = `FACULTY: ${state.schedule[0].teacher}`;
+        windowEl.textContent = "10:00 AM – 03:00 PM";
+        progWrap.style.display = "none";
+      }
+
+      const scheduleToRender = ROUTINE_DATA[displayDay] || ROUTINE_DATA.Sunday;
+      document.getElementById("schedule-heading").textContent = `${displayDay} Sequence`;
+
+      const stackEl = document.getElementById("routine-stack");
+      stackEl.innerHTML = scheduleToRender.map((item, idx) => {
+        const isCurrent = state.status === "LIVE_SESSION" && state.day === displayDay && state.activeIndex === idx;
+        const typeBadge = item.type === "practical" 
+          ? `<span class="mono text-[10px] px-2.5 py-0.5 rounded bg-[#E6D17B]/20 text-[#F1E49A] border border-[#F1E49A]/30">LAB • 70M</span>`
+          : item.type === "break"
+          ? `<span class="mono text-[10px] px-2.5 py-0.5 rounded bg-[#FEF4D5]/10 text-[#E6D17B]">BREAK • 30M</span>`
+          : `<span class="mono text-[10px] px-2.5 py-0.5 rounded bg-[#FEF4D5]/5 text-[#FEF4D5]/60">THEORY</span>`;
+
+        return `
+          <div class="slot-card glass-panel rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isCurrent ? 'slot-active' : ''}">
+            <div class="flex items-start sm:items-center gap-4">
+              <div class="mono text-xs text-[#E6D17B] w-20 shrink-0">
+                <p class="font-bold text-[#FEF4D5]">${item.period}</p>
+                <p class="opacity-70">${item.start} - ${item.end}</p>
+              </div>
+              <div class="space-y-1 border-l border-[#F1E49A]/15 pl-4">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-xl font-bold tracking-tight text-[#FEF4D5]">${item.code}</span>
+                  ${typeBadge}
+                  ${isCurrent ? `<span class="mono text-[10px] font-bold px-2 py-0.5 rounded bg-[#F1E49A] text-[#2C1810]">LIVE NOW</span>` : ''}
+                </div>
+                <p class="text-sm text-[#FEF4D5]/75">${item.title}</p>
+              </div>
+            </div>
+            <div class="sm:text-right flex sm:flex-col justify-between items-center sm:items-end border-t sm:border-t-0 border-[#F1E49A]/10 pt-3 sm:pt-0">
+              <span class="mono text-[11px] uppercase tracking-wider text-[#E6D17B]/70">INSTRUCTOR</span>
+              <span class="mono text-sm font-bold text-[#F1E49A]">${item.teacher}</span>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    updateDashboard();
+    setInterval(updateDashboard, 1000);
+  </script>
+</body>
+</html>
