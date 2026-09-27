@@ -155,8 +155,8 @@ function renderFacultyGrid(query = "") {
 
     const sessionList = f.sessions.map(s => `
       <div class="flex items-center justify-between text-xs mono py-1.5 divider-row">
-        <span class="text-parchment font-semibold">${s.day.slice(0, 3).toUpperCase()} • ${s.period}</span>
-        <span class="text-ochre">${s.code} (${s.time})</span>
+        <span class="text-parchment font-semibold">${s.day} (${s.period})</span>
+        <span class="text-ochre">${s.code} • ${s.time}</span>
       </div>
     `).join("");
 
@@ -165,12 +165,12 @@ function renderFacultyGrid(query = "") {
         <div class="space-y-3">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <span class="mono text-[10px] uppercase tracking-[0.2em] text-ochre">${f.dept}</span>
-              <h4 class="text-2xl font-bold text-parchment mt-0.5">${f.code}</h4>
+              <span class="mono text-[10px] uppercase tracking-widest text-ochre">${f.dept}</span>
+              <h4 class="text-2xl font-bold text-parchment mt-0.5">Code: ${f.code}</h4>
               <p class="text-xs sub-desc">${f.name} • ${f.role}</p>
             </div>
             <div class="mono text-xs font-bold px-3 py-1.5 rounded-lg tab-btn-active shrink-0">
-              ${f.weeklyCount} SLOTS / WK
+              ${f.weeklyCount} Classes / Week
             </div>
           </div>
           <div class="flex flex-wrap gap-1.5 pt-1">
@@ -179,7 +179,7 @@ function renderFacultyGrid(query = "") {
         </div>
 
         <div class="space-y-1 pt-3 divider-top-always">
-          <p class="mono text-[10px] uppercase tracking-wider instructor-label mb-2">WEEKLY CLASS MATRIX</p>
+          <p class="mono text-[10px] uppercase tracking-wider instructor-label mb-2">CLASS DAYS & TIME</p>
           ${sessionList}
         </div>
       </div>
@@ -210,7 +210,7 @@ function renderRadarGrid() {
 
         <div class="sm:text-right shrink-0 flex sm:flex-col justify-between items-center sm:items-end pt-3 sm:pt-0 divider-top">
           <span class="mono text-xs font-bold px-3 py-1 rounded-full badge-lab">${countdownBadge}</span>
-          <span class="mono text-xs text-ochre mt-1.5">${item.targetDate}</span>
+          <span class="mono text-xs text-ochre mt-1.5">Date: ${item.targetDate}</span>
         </div>
       </div>
     `;
@@ -253,40 +253,40 @@ function updateDashboard() {
 
   if (state.status === "LIVE_SESSION") {
     const s = state.activeSlot;
-    badge.textContent = s.type === "break" ? "REFRESHMENT WINDOW" : "SESSION IN PROGRESS";
+    badge.textContent = s.type === "break" ? "TIFFIN BREAK NOW" : "CLASS RUNNING NOW";
     periodTag.textContent = `${s.period.toUpperCase()} PERIOD`;
-    subLabel.textContent = s.type === "practical" ? "70-MINUTE PRACTICAL LAB" : "ACTIVE LECTURE";
+    subLabel.textContent = s.type === "practical" ? "PRACTICAL LAB (70 MINS)" : "CURRENT SUBJECT";
     codeEl.textContent = s.code;
     titleEl.textContent = s.title;
-    timerLabel.textContent = "TIME REMAINING";
+    timerLabel.textContent = "CLASS ENDS IN";
     countdownEl.textContent = state.countdown;
-    teacherEl.textContent = `FACULTY: ${s.teacher}`;
+    teacherEl.textContent = `TEACHER: ${s.teacher}`;
     windowEl.textContent = `${formatClockTime(s.start)} – ${formatClockTime(s.end)}`;
     progWrap.style.display = "block";
     progBar.style.width = `${state.progress}%`;
-    progText.textContent = `${state.progress}% ELAPSED`;
-    nextUpEl.textContent = state.nextSlot ? `NEXT: ${state.nextSlot.code} (${state.nextSlot.teacher})` : "FINAL PERIOD OF DAY";
+    progText.textContent = `${state.progress}% COMPLETED`;
+    nextUpEl.textContent = state.nextSlot ? `NEXT CLASS: ${state.nextSlot.code} (${state.nextSlot.teacher})` : "LAST CLASS OF TODAY";
   } else if (state.status === "PRE_COLLEGE") {
     const first = state.nextSlot;
-    badge.textContent = "STANDBY MODE";
+    badge.textContent = "MORNING COUNTDOWN";
     periodTag.textContent = state.day.toUpperCase();
     subLabel.textContent = state.headline;
     codeEl.textContent = first.code;
-    titleEl.textContent = `Opening Lecture: ${first.title}`;
-    timerLabel.textContent = "DOORS OPEN IN";
+    titleEl.textContent = `1st Class: ${first.title}`;
+    timerLabel.textContent = "CLASS STARTS IN";
     countdownEl.textContent = state.countdown;
-    teacherEl.textContent = `FACULTY: ${first.teacher}`;
+    teacherEl.textContent = `TEACHER: ${first.teacher}`;
     windowEl.textContent = `${formatClockTime(first.start)} – ${formatClockTime(first.end)}`;
     progWrap.style.display = "none";
   } else {
-    badge.textContent = state.status === "WEEKEND" ? "OFF-GRID / WEEKEND" : "DAY CONCLUDED";
+    badge.textContent = state.status === "WEEKEND" ? "WEEKEND HOLIDAY" : "COLLEGE OVER FOR TODAY";
     periodTag.textContent = `NEXT: ${state.previewDay.toUpperCase()}`;
     subLabel.textContent = state.headline;
     codeEl.textContent = "10:00 AM";
     titleEl.textContent = state.subtext;
-    timerLabel.textContent = "FIRST SLOT";
+    timerLabel.textContent = "1ST CLASS TOMORROW";
     countdownEl.textContent = state.schedule[0].code;
-    teacherEl.textContent = `FACULTY: ${state.schedule[0].teacher}`;
+    teacherEl.textContent = `TEACHER: ${state.schedule[0].teacher}`;
     windowEl.textContent = "10:00 AM – 03:00 PM";
     progWrap.style.display = "none";
   }
@@ -297,35 +297,35 @@ function updateDashboard() {
     renderDayTabs(displayDay);
 
     const scheduleToRender = ROUTINE_DATA[displayDay] || ROUTINE_DATA.Sunday;
-    document.getElementById("schedule-heading").textContent = `${displayDay} Sequence`;
+    document.getElementById("schedule-heading").textContent = `${displayDay}'s Full Routine`;
 
     const stackEl = document.getElementById("routine-stack");
     stackEl.innerHTML = scheduleToRender.map((item, idx) => {
       const isCurrent = state.status === "LIVE_SESSION" && state.day === displayDay && state.activeIndex === idx;
       const typeBadge = item.type === "practical" 
-        ? `<span class="mono text-[10px] px-2.5 py-0.5 rounded badge-lab">LAB • 70M</span>`
+        ? `<span class="mono text-[10px] px-2.5 py-0.5 rounded badge-lab">PRACTICAL • 70 MINS</span>`
         : item.type === "break"
-        ? `<span class="mono text-[10px] px-2.5 py-0.5 rounded badge-break">BREAK • 30M</span>`
-        : `<span class="mono text-[10px] px-2.5 py-0.5 rounded badge-theory">THEORY</span>`;
+        ? `<span class="mono text-[10px] px-2.5 py-0.5 rounded badge-break">BREAK • 30 MINS</span>`
+        : `<span class="mono text-[10px] px-2.5 py-0.5 rounded badge-theory">CLASS</span>`;
 
       return `
         <div class="routine-slot-card slot-card glass-panel rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isCurrent ? 'slot-active' : ''}">
           <div class="flex items-start sm:items-center gap-4">
-            <div class="mono text-xs w-24 shrink-0 period-col">
-              <p class="font-bold period-title">${item.period}</p>
-              <p class="opacity-70">${item.start} - ${item.end}</p>
+            <div class="mono text-xs w-28 shrink-0 period-col">
+              <p class="font-bold period-title">${item.period} Period</p>
+              <p class="opacity-75">${formatClockTime(item.start)} - ${formatClockTime(item.end)}</p>
             </div>
             <div class="space-y-1 pl-4 divider-left">
               <div class="flex flex-wrap items-center gap-2.5">
                 <span class="text-xl font-bold tracking-tight code-title">${item.code}</span>
                 ${typeBadge}
-                ${isCurrent ? `<span class="mono text-[10px] font-bold px-2 py-0.5 rounded live-pill">LIVE NOW</span>` : ''}
+                ${isCurrent ? `<span class="mono text-[10px] font-bold px-2 py-0.5 rounded live-pill">RUNNING NOW</span>` : ''}
               </div>
               <p class="text-sm sub-desc">${item.title}</p>
             </div>
           </div>
           <div onclick="jumpToFaculty('${item.teacher}')" class="cursor-pointer sm:text-right flex sm:flex-col justify-between items-center sm:items-end pt-3 sm:pt-0 divider-top group">
-            <span class="mono text-[11px] uppercase tracking-wider instructor-label">INSTRUCTOR</span>
+            <span class="mono text-[11px] uppercase tracking-wider instructor-label">TEACHER</span>
             <span class="mono text-sm font-bold instructor-code group-hover:underline">${item.teacher} →</span>
           </div>
         </div>
