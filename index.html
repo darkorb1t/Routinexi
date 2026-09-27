@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class XI (S) — 3D Live Academic Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: rgb(254, 244, 213);
+      --gold: rgb(241, 228, 154);
+      --ochre: rgb(230, 209, 123);
+      --espresso: rgb(44, 24, 16);
+      --espresso-deep: rgb(22, 11, 7);
+      --surface-glass: rgba(254, 244, 213, 0.04);
+      --border-subtle: rgba(241, 228, 154, 0.16);
+      --border-active: rgba(241, 228, 154, 0.75);
+    }
+
+    body {
+      background-color: var(--espresso-deep);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(230, 209, 123, 0.14) 0%, transparent 62%),
+        radial-gradient(circle at 85% 80%, rgba(44, 24, 16, 0.95) 0%, transparent 55%);
+      color: var(--parchment);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    .glass-panel {
+      background: var(--surface-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hero-card-active {
+      background: linear-gradient(145deg, rgba(254, 244, 213, 0.97) 0%, rgba(241, 228, 154, 0.92) 100%);
+      color: var(--espresso);
+      border: 2px solid var(--gold);
+      box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.75), 0 0 40px rgba(241, 228, 154, 0.2);
+      transform-style: preserve-3d;
+    }
+
+    .perspective-stage {
+      perspective: 1200px;
+    }
+
+    .slot-card {
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    .slot-active {
+      background: rgba(241, 228, 154, 0.13);
+      border: 1px solid var(--border-active);
+      box-shadow: 0 0 30px rgba(230, 209, 123, 0.14);
+    }
+
+    .tab-btn-active {
+      background-color: var(--gold);
+      color: var(--espresso);
+    }
+
+    .tab-btn-idle {
+      color: rgba(254, 244, 213, 0.7);
+    }
+    .tab-btn-idle:hover {
+      color: var(--parchment);
+    }
+
+    .badge-lab {
+      background: rgba(230, 209, 123, 0.2);
+      color: var(--gold);
+      border: 1px solid rgba(241, 228, 154, 0.35);
+    }
+    .badge-break {
+      background: rgba(254, 244, 213, 0.1);
+      color: var(--ochre);
+    }
+    .badge-theory {
+      background: rgba(254, 244, 213, 0.06);
+      color: rgba(254, 244, 213, 0.65);
+    }
+    .live-pill {
+      background-color: var(--gold);
+      color: var(--espresso);
+    }
+
+    .period-col { color: var(--ochre); }
+    .period-title, .code-title { color: var(--parchment); }
+    .sub-desc { color: rgba(254, 244, 213, 0.75); }
+    .divider-left { border-left: 1px solid rgba(241, 228, 154, 0.16); }
+    .divider-top { border-top: 1px solid rgba(241, 228, 154, 0.12); }
+    @media (min-width: 640px) {
+      .divider-top { border-top: none; }
+    }
+    .instructor-label { color: rgba(230, 209, 123, 0.7); }
+    .instructor-code { color: var(--gold); }
+
+    .text-ochre { color: var(--ochre); }
+    .text-parchment { color: var(--parchment); }
+    .border-gold-subtle { border-color: rgba(241, 228, 154, 0.15); }
+    .border-espresso-subtle { border-color: rgba(44, 24, 16, 0.15); }
+    .bg-espresso { background-color: var(--espresso); }
+    .bg-espresso-track { background-color: rgba(44, 24, 16, 0.16); }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background-color: var(--espresso);
+      animation: pulse-ring 1.8s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <header class="sticky top-0 z-40 glass-panel border-b border-gold-subtle">
+    <div class="max-w-5xl mx-auto px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <div>
+        <p class="mono text-[11px] uppercase tracking-[0.25em] text-ochre">Sylhet Govt. Model School & College</p>
+        <h1 class="text-lg font-bold tracking-tight text-parchment">CLASS XI (SCIENCE) — ARCHIVE '26</h1>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="text-right">
+          <p id="live-date" class="mono text-xs text-ochre uppercase tracking-wider">LOADING DATE</p>
+          <p id="live-clock" class="mono text-sm font-semibold text-parchment">00:00:00 AM</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-5 py-10 space-y-14">
+
+    <section class="perspective-stage">
+      <div id="live-hero-card" class="hero-card-active rounded-2xl p-6 sm:p-9">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-espresso-subtle">
+          <div class="flex items-center gap-2.5">
+            <span class="pulse-dot"></span>
+            <span id="hero-status-badge" class="mono text-xs font-bold uppercase tracking-[0.2em]">LIVE TELEMETRY</span>
+          </div>
+          <span id="hero-period-tag" class="mono text-xs font-semibold px-3 py-1 rounded-full bg-espresso text-parchment">
+            PERIOD —
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-7 items-center">
+          <div class="md:col-span-7 space-y-2">
+            <p id="hero-sub-label" class="mono text-xs uppercase tracking-[0.18em] opacity-75">CURRENT MODULE</p>
+            <h2 id="hero-subject-code" class="text-4xl sm:text-6xl font-bold tracking-tight leading-none">---</h2>
+            <p id="hero-subject-title" class="text-base sm:text-lg font-medium opacity-85">Initializing schedule engine...</p>
+          </div>
+
+          <div class="md:col-span-5 md:border-l border-espresso-subtle md:pl-6 flex flex-col justify-between space-y-3">
+            <div>
+              <p id="hero-timer-label" class="mono text-xs uppercase tracking-[0.18em] opacity-75">REMAINING IN SLOT</p>
+              <p id="hero-countdown" class="mono text-4xl sm:text-5xl font-bold tracking-tight mt-1">00:00</p>
+            </div>
+            <div class="flex items-center justify-between text-xs mono pt-2 border-t border-espresso-subtle">
+              <span id="hero-teacher">FACULTY: —</span>
+              <span id="hero-time-window">10:00 - 10:45</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="hero-progress-wrapper" class="space-y-2 pt-2">
+          <div class="w-full h-2.5 bg-espresso-track rounded-full overflow-hidden">
+            <div id="hero-progress-bar" class="h-full bg-espresso transition-all duration-700" style="width: 0%"></div>
+          </div>
+          <div class="flex justify-between mono text-[11px] font-semibold uppercase tracking-wider opacity-80">
+            <span id="hero-progress-text">0% COMPLETE</span>
+            <span id="hero-next-up">NEXT: —</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-6 perspective-stage">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gold-subtle pb-4">
+        <div>
+          <p class="mono text-xs uppercase tracking-[0.2em] text-ochre">3D TIMELINE MATRIX</p>
+          <h3 id="schedule-heading" class="text-2xl font-bold text-parchment">Today's Academic Sequence</h3>
+        </div>
+        <div id="day-switcher" class="flex flex-wrap gap-1.5"></div>
+      </div>
+
+      <div id="routine-stack" class="grid grid-cols-1 gap-4"></div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-5 py-10 mt-12 border-t border-gold-subtle">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs mono text-ochre opacity-75">
+      <div>
+        <p class="uppercase tracking-widest font-bold text-parchment">ROUTINE COMMITTEE — SGMSC</p>
+        <p class="mt-1">Md. Ashraful Alam (Accounting) • Md. Delwar Hossain (Math) • Dip Kumar Roy (Chemistry)</p>
+      </div>
+      <div class="sm:text-right">
+        <p>SYSTEM STATUS: ONLINE</p>
+        <p>BUILD // 2026.XI.SCI</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <script src="routine-engine.js"></script>
+  <script src="motion-3d.js"></script>
+</body>
+</html>
