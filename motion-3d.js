@@ -538,20 +538,20 @@ function renderNotesGrid() {
           <span class="mono text-[10px] font-bold px-2.5 py-0.5 rounded badge-lab">${item.category}</span>
           <span class="mono text-xs text-ochre">${item.subject}</span>
         </div>
-        <h4 class="text-xl font-bold text-parchment">${item.title}</h4>
-          <p class="text-xs sub-desc mono">${item.meta}</p>
-        </div>
-
-        <div class="sm:text-right shrink-0 flex sm:flex-col justify-between items-center sm:items-end pt-3 sm:pt-0 divider-top">
-          <span class="mono text-xs font-bold px-3 py-1 rounded-full badge-lab">${countdownBadge}</span>
-          <span class="mono text-xs text-ochre mt-1.5">Date: ${item.targetDate}</span>
-        </div>
+        <h4 class="text-lg font-bold text-parchment">${item.title}</h4>
+        <p class="text-xs sub-desc mono">${item.info}</p>
       </div>
-    `;
-  }).join("");
+      <div class="pt-3 divider-top-always flex justify-end">
+        <a href="${item.link}" target="_blank" class="mono text-xs font-bold px-4 py-2 rounded-lg tab-btn-active">
+          Open / Download PDF →
+        </a>
+      </div>
+    </div>
+  `).join("");
 
-  animateCardsInSelector(".radar-card");
+  animateCardsInSelector(".notes-card");
 }
+
 
 function mapCodeToSubjectId(code) {
   const c = code.toUpperCase();
