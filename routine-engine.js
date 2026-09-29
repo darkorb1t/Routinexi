@@ -114,6 +114,61 @@ const RADAR_EVENTS = [
   }
 ];
 
+const ATTENDANCE_SUBJECTS = [
+  { id: "PHY", name: "Physics (1st, 2nd & Lab)", codes: "Phy-1, Phy-2, Lab", teacher: "HU" },
+  { id: "CHE", name: "Chemistry (1st, 2nd & Lab)", codes: "Che-1, Che-2, Lab", teacher: "MZ, MF, SK" },
+  { id: "MATH", name: "Higher Math (1st, 2nd & Lab)", codes: "H.M-1, H.M-2, Lab", teacher: "TK, NZ, DH" },
+  { id: "BIO", name: "Biology (1st, 2nd & Lab)", codes: "Bio-1, Bio-2, Lab", teacher: "RB, AAli" },
+  { id: "ENG", name: "English (1st & 2nd Paper)", codes: "E-1, E-2", teacher: "MM, SY" },
+  { id: "BAN", name: "Bangla (1st & 2nd Paper)", codes: "B-1, B-2", teacher: "AT, JA" },
+  { id: "ICT", name: "ICT", codes: "ICT", teacher: "KA" }
+];
+
+const STUDY_NOTES = [
+  {
+    category: "SYLLABUS",
+    subject: "All Subjects (XI-Science)",
+    title: "Full College Syllabus & Book List 2026",
+    info: "PDF Document • Official College Copy",
+    link: "#syllabus-pdf"
+  },
+  {
+    category: "PRACTICAL PDF",
+    subject: "Physics 1st Paper Lab (HU)",
+    title: "Vernier Calipers, Screw Gauge & Spherometer Guide",
+    info: "Sunday 5th-6th Period • Experiment List",
+    link: "#phy-lab"
+  },
+  {
+    category: "PRACTICAL PDF",
+    subject: "Chemistry 1st Paper Lab (SK)",
+    title: "Qualitative Salt Analysis & Lab Safety Rules",
+    info: "Wednesday 5th-6th Period • Lab Manual",
+    link: "#che-lab"
+  },
+  {
+    category: "PRACTICAL PDF",
+    subject: "Higher Math 1st Paper Lab (DH)",
+    title: "Graph Plotting & Function Analysis Instructions",
+    info: "Monday 5th-6th Period • Practical Guide",
+    link: "#math-lab"
+  },
+  {
+    category: "PRACTICAL PDF",
+    subject: "Biology 1st Paper Lab (AAli)",
+    title: "Microscope Setup & Plant Cell Division Slides",
+    info: "Thursday 5th-6th Period • Drawing Rules",
+    link: "#bio-lab"
+  },
+  {
+    category: "CLASS NOTES",
+    subject: "ICT & Higher Math",
+    title: "Chapter-1 Lecture Notes & Formula Sheet",
+    info: "Handwritten PDF • Shared by Classmates",
+    link: "#class-notes"
+  }
+];
+
 function buildFacultyProfiles() {
   const profiles = {};
   Object.keys(ROUTINE_DATA).forEach(day => {
@@ -259,3 +314,4 @@ function getLiveRoutineState(now = new Date()) {
     }
   }
 }
+

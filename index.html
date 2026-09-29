@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SGMSC XI (Science) — Class Routine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SGMSC XI (Science) — Student Hub 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +20,20 @@
       --border-active: rgba(241, 228, 154, 0.75);
     }
 
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    input, textarea {
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
     body {
       background-color: var(--espresso-deep);
       background-image: 
@@ -29,7 +43,7 @@
       font-family: 'Space Grotesk', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
-      padding-bottom: 6rem;
+      padding-bottom: 6.5rem;
     }
 
     .mono { font-family: 'JetBrains Mono', monospace; }
@@ -42,11 +56,13 @@
     }
 
     .floating-dock {
-      background: rgba(22, 11, 7, 0.85);
+      background: rgba(22, 11, 7, 0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(241, 228, 154, 0.28);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(241, 228, 154, 0.1);
+      border: 1px solid rgba(241, 228, 154, 0.32);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 25px rgba(241, 228, 154, 0.12);
+      width: calc(100vw - 1.25rem);
+      max-width: 32rem;
     }
 
     .dock-active {
@@ -56,7 +72,7 @@
     }
 
     .dock-idle {
-      color: rgba(254, 244, 213, 0.7);
+      color: rgba(254, 244, 213, 0.72);
     }
     .dock-idle:hover {
       color: var(--parchment);
@@ -84,12 +100,23 @@
       box-shadow: 0 0 30px rgba(230, 209, 123, 0.14);
     }
 
+    .slot-absent {
+      background: rgba(254, 244, 213, 0.02);
+      border: 1px dashed rgba(230, 209, 123, 0.35);
+    }
+
     .tab-btn-active {
       background-color: var(--gold);
       color: var(--espresso);
     }
     .tab-btn-idle { color: rgba(254, 244, 213, 0.7); }
     .tab-btn-idle:hover { color: var(--parchment); }
+
+    .btn-absent-active {
+      background-color: rgba(230, 209, 123, 0.22);
+      color: var(--parchment);
+      border: 1px solid var(--gold);
+    }
 
     .badge-lab {
       background: rgba(230, 209, 123, 0.2);
@@ -161,10 +188,10 @@
     <div class="max-w-5xl mx-auto px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
       <div>
         <p class="mono text-[11px] uppercase tracking-[0.2em] text-ochre">Sylhet Govt. Model School & College</p>
-        <h1 class="text-lg font-bold tracking-tight text-parchment">CLASS XI (SCIENCE) — ROUTINE 2026</h1>
+        <h1 class="text-lg font-bold tracking-tight text-parchment">CLASS XI (SCIENCE) — STUDENT HUB 2026</h1>
       </div>
       <div class="flex items-center gap-4">
-        <div class="text-right">
+        <div class="sm:text-right">
           <p id="live-date" class="mono text-xs text-ochre uppercase tracking-wider">LOADING DATE</p>
           <p id="live-clock" class="mono text-sm font-semibold text-parchment">00:00:00 AM</p>
         </div>
@@ -172,9 +199,9 @@
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-5 py-10 space-y-12">
+  <main class="max-w-5xl mx-auto px-4 sm:px-5 py-8 space-y-12">
 
-    <div id="view-routine" class="space-y-14">
+    <div id="view-routine" class="space-y-12">
       <section class="perspective-stage">
         <div id="live-hero-card" class="hero-card-active rounded-2xl p-6 sm:p-9">
           <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-espresso-subtle">
@@ -236,7 +263,7 @@
         <div>
           <p class="mono text-xs uppercase tracking-[0.15em] text-ochre">TEACHERS LIST</p>
           <h2 class="text-3xl font-bold text-parchment mt-1">Subject Teachers & Class Days</h2>
-          <p class="text-sm sub-desc mt-1">Search teacher short name (HU, MZ, RB, TK) or subject name to see when they take classes.</p>
+          <p class="text-sm sub-desc mt-1">Search teacher short code (HU, MZ, RB, TK) or subject name to see when they take classes.</p>
         </div>
         <div class="w-full md:w-72">
           <input id="faculty-search" type="text" placeholder="Search teacher or subject (e.g. HU, Phy)..." 
@@ -257,17 +284,45 @@
       <div id="radar-grid" class="grid grid-cols-1 gap-4"></div>
     </div>
 
+    <div id="view-attendance" class="hidden space-y-8 perspective-stage">
+      <div class="border-b border-gold-subtle pb-5">
+        <p class="mono text-xs uppercase tracking-[0.15em] text-ochre">DAILY CLASS REGISTER</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-parchment mt-1">Mark Attendance by Period</h2>
+        <p class="text-sm sub-desc mt-1">Select the date and tap Present or Absent for each period you attended.</p>
+      </div>
+
+      <div id="attendance-summary"></div>
+      <div id="attendance-daily-box" class="space-y-4"></div>
+      <div id="attendance-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </div>
+
+    <div id="view-notes" class="hidden space-y-8 perspective-stage">
+      <div class="border-b border-gold-subtle pb-5">
+        <p class="mono text-xs uppercase tracking-[0.15em] text-ochre">STUDY MATERIALS</p>
+        <h2 class="text-3xl font-bold text-parchment mt-1">Syllabus, Practical PDFs & Notes</h2>
+        <p class="text-sm sub-desc mt-1">Download lab manuals, book lists, and shared class notes for XI-Science.</p>
+      </div>
+
+      <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+    </div>
+
   </main>
 
-  <nav class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 floating-dock rounded-2xl p-1.5 flex items-center gap-1.5">
-    <button id="dock-btn-routine" onclick="switchAppView('routine')" class="dock-active mono text-xs px-4 py-2.5 rounded-xl transition-all">
+  <nav class="fixed bottom-3.5 left-1/2 -translate-x-1/2 z-50 floating-dock rounded-2xl p-1 grid grid-cols-5 gap-1">
+    <button id="dock-btn-routine" onclick="switchAppView('routine')" class="dock-active mono text-[11px] sm:text-xs py-2.5 rounded-xl transition-all text-center">
       Routine
     </button>
-    <button id="dock-btn-faculty" onclick="switchAppView('faculty')" class="dock-idle mono text-xs px-4 py-2.5 rounded-xl transition-all">
+    <button id="dock-btn-faculty" onclick="switchAppView('faculty')" class="dock-idle mono text-[11px] sm:text-xs py-2.5 rounded-xl transition-all text-center">
       Teachers
     </button>
-    <button id="dock-btn-radar" onclick="switchAppView('radar')" class="dock-idle mono text-xs px-4 py-2.5 rounded-xl transition-all">
-      Exams & Notice
+    <button id="dock-btn-radar" onclick="switchAppView('radar')" class="dock-idle mono text-[11px] sm:text-xs py-2.5 rounded-xl transition-all text-center">
+      Exams
+    </button>
+    <button id="dock-btn-attendance" onclick="switchAppView('attendance')" class="dock-idle mono text-[11px] sm:text-xs py-2.5 rounded-xl transition-all text-center">
+      Attend
+    </button>
+    <button id="dock-btn-notes" onclick="switchAppView('notes')" class="dock-idle mono text-[11px] sm:text-xs py-2.5 rounded-xl transition-all text-center">
+      Notes
     </button>
   </nav>
 
@@ -292,3 +347,4 @@
   <script src="motion-3d.js"></script>
 </body>
 </html>
+
